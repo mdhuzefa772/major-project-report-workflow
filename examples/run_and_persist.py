@@ -9,7 +9,8 @@ re-attach and keep waiting; nothing is lost.
 
 Usage:
   python run_and_persist.py guidelines.pdf cover.docx chapter1.docx \
-      [--source source.docx] [--mode GENERATE] [--interval 10] [--branch runs]
+      [--source source.docx | --source-text notes.md] \
+      [--mode GENERATE] [--interval 10] [--branch runs]
 
   # re-attach to an existing execution after a restart:
   python run_and_persist.py --execution-id <id> [--interval 10] [--branch runs]
@@ -104,6 +105,7 @@ def main() -> None:
     parser.add_argument("sample_cover_docx", nargs="?")
     parser.add_argument("sample_chapter_docx", nargs="?")
     parser.add_argument("--source", help="user's source content DOCX (Stream B)")
+    parser.add_argument("--source-text", help="path to a .txt/.md file with the user's project material (Stream B as text)")
     parser.add_argument("--mode", default="GENERATE",
                         choices=["REFORMAT_ONLY", "GENERATE", "EXPAND"])
     parser.add_argument("--interval", type=float, default=10.0,
@@ -138,6 +140,7 @@ def main() -> None:
             "sample_cover_docx": file_input(args.sample_cover_docx),
             "sample_chapter_docx": file_input(args.sample_chapter_docx),
             "source_content_docx": file_input(args.source) if args.source else None,
+            "source_content_text": Path(args.source_text).read_text(encoding="utf-8") if args.source_text else None,
         }
         execution = client.workflows.execute_workflow(
             workflow_identifier="major-project-seminar-report", input=payload)
@@ -155,6 +158,7 @@ def main() -> None:
             "sample_cover_docx": os.path.basename(args.sample_cover_docx),
             "sample_chapter_docx": os.path.basename(args.sample_chapter_docx),
             "source": os.path.basename(args.source) if args.source else None,
+            "source_text": os.path.basename(args.source_text) if args.source_text else None,
             "started_at": datetime.now(timezone.utc).isoformat(),
         }
         (run_dir / "input.json").write_text(json.dumps(meta, indent=2))
