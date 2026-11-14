@@ -1,0 +1,91 @@
+{
+  "PAGE": {
+    "SIZE": "A4",
+    "ORIENTATION": "PORTRAIT",
+    "MARGIN_LEFT_IN": 1.5,
+    "MARGIN_RIGHT_IN": 1.0,
+    "MARGIN_TOP_IN": 1.0,
+    "MARGIN_BOTTOM_IN": 1.0,
+    "WIDTH_EMU": 7560000,
+    "HEIGHT_EMU": 10692000,
+    "WIDTH_TWIPS": 11906,
+    "HEIGHT_TWIPS": 16838
+  },
+  "FONT": {
+    "FAMILY": "Calibri",
+    "BODY_SIZE_PT": 12,
+    "BODY_BOLD": false,
+    "BODY_ITALIC": false,
+    "BODY_ALIGNMENT": "JUSTIFIED",
+    "BODY_LINE_SPACING": 1.5,
+    "MAIN_HEADING_SIZE_PT": 14,
+    "MAIN_HEADING_BOLD": true,
+    "MAIN_HEADING_ALIGNMENT": "BOTH",
+    "SUB_HEADING_SIZE_PT": 12,
+    "SUB_HEADING_BOLD": true,
+    "SUB_HEADING_ITALIC": true,
+    "SUB_HEADING_ALIGNMENT": "LEFT",
+    "COVER_TITLE_SIZE_PT": 16,
+    "COVER_TITLE_BOLD": true,
+    "COVER_TITLE_ALIGNMENT": "RIGHT"
+  },
+  "TABLE": {
+    "STYLE": "THREE_LINE_ACADEMIC",
+    "BORDER_TOP_VAL": "single",
+    "BORDER_TOP_SZ_EIGHTH": 4,
+    "BORDER_TOP_COLOR": "000000",
+    "BORDER_BOTTOM_VAL": "single",
+    "BORDER_BOTTOM_SZ_EIGHTH": 4,
+    "BORDER_BOTTOM_COLOR": "000000",
+    "HEADER_ROW_BOLD": true,
+    "CELL_ALIGNMENT": "CENTER",
+    "CELL_SIZE_PT": 12
+  },
+  "COVER_PAGE": {
+    "VERTICAL_OFFSET_PARAGRAPHS": 19,
+    "HAS_HEADER": false,
+    "HAS_FOOTER": false,
+    "PAGE_COUNTED": false
+  },
+  "FIRST_CONTENT_PAGE": {
+    "HAS_HEADER": false,
+    "HAS_FOOTER": false,
+    "PAGE_COUNTED": true,
+    "REPEATS_COVER_TITLE": true
+  },
+  "SUBSEQUENT_PAGES": {
+    "HAS_HEADER": true,
+    "HAS_FOOTER": true,
+    "PAGE_NUMBER_DISPLAYED": true,
+    "PAGE_NUMBER_START": 2,
+    "HEADER_TEXT_TEMPLATE": "Chapter -{{CHAPTER_NUM}}",
+    "HEADER_SIZE_PT": 10,
+    "HEADER_ALIGNMENT": "RIGHT",
+    "FOOTER_ALIGNMENT": "CENTER",
+    "FOOTER_TYPE": "PAGE_FIELD"
+  },
+  "REFERENCES": {
+    "FORMAT": "IEEE",
+    "SEPARATE_FILE": null,
+    "INDENT_STYLE": null,
+    "SIZE_PT": null,
+    "ALIGNMENT": null
+  },
+  "PROJECT": {
+    "NAME": "PENDING — set at Gate 1",
+    "TYPE": "major-project",
+    "INSTITUTE": null,
+    "DEPARTMENT": null,
+    "ACADEMIC_YEAR": null,
+    "CHAPTER_COUNT": 5,
+    "CHAPTER_LIST": [
+      "Introduction",
+      "Literature Review",
+      "Methodology",
+      "Results and Discussion",
+      "Conclusion and Future Scope"
+    ]
+  },
+  "CONTENT_MODE": "GENERATE",
+  "USER_ACTUAL_RESULTS": {}
+}
