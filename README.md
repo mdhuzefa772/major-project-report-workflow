@@ -40,7 +40,9 @@ apps/worker/
 deploy/docker/Dockerfile.worker # managed-deployment image
 examples/
   execute_example.py             # start an execution with the sample inputs
+  run_and_persist.py             # run + checkpoint artifacts to the repo at intervals
   test_offline_core.py           # offline test of the deterministic core
+.devcontainer/devcontainer.json  # Codespaces-ready environment
 ```
 
 ## Run locally
@@ -54,6 +56,37 @@ PYTHONPATH=src uv run python -m worker.entrypoints.worker
 Then start an execution (see `examples/execute_example.py`) or trigger it from the
 Mistral Console. Human gates appear as pending update tasks in the execution's
 streaming events; complete them from Studio or via the SDK's update handler.
+
+## Run in GitHub Codespaces (no managed deployment needed)
+
+The worker connects **outbound** to the Mistral API, so a Codespace can run it
+without any public endpoint. Workflow state is durable on the Mistral platform,
+and this repo stores the artifacts, so nothing is lost when the Codespace is
+recycled.
+
+1. Add your key: GitHub → **Settings → Codespaces → Secrets** →
+   new secret `MISTRAL_API_KEY`.
+2. Repo page → **Code → Codespaces → Create codespace on main** (the
+   devcontainer installs the worker automatically).
+3. Drop your input files into the Codespace (drag & drop): the guidelines PDF,
+   the sample cover/chapter DOCX files, and your source content DOCX.
+4. Terminal 1 — start the worker:
+   ```bash
+   python -m worker.entrypoints.worker
+   ```
+5. Terminal 2 — run + persist. Checkpoints are committed to the `runs` branch
+   every `--interval` minutes; the final DOCX files and result are committed
+   on completion, under `runs/<execution_id>/`:
+   ```bash
+   python examples/run_and_persist.py \
+       "Project Report Writing Guidelines.pdf" "Sample CoverPage.docx" "Sample Chapter-1.docx" \
+       --source your-content.docx --mode GENERATE --interval 10
+   ```
+6. If the Codespace restarts mid-run, re-attach without losing anything
+   (workflow state lives on the Mistral platform):
+   ```bash
+   python examples/run_and_persist.py --execution-id <execution_id>
+   ```
 
 ## Deploy (managed)
 
